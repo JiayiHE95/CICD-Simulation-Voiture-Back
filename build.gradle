@@ -15,9 +15,17 @@ dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-resteasy-reactive'
     implementation 'io.quarkus:quarkus-arc'
+    implementation 'javax.ws.rs:javax.ws.rs-api:2.1' // Explicitly add JAX-RS API
+    implementation 'io.quarkus:quarkus-vertx-http'
+    implementation 'io.quarkus:quarkus-vertx-http-deployment'
+
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
     testImplementation "io.quarkus:quarkus-jacoco"
+
+
+
 }
 
 group 'org.acme'
