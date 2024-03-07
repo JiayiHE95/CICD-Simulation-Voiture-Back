@@ -28,6 +28,10 @@ public class Simulateur implements Runnable {
         return simulateur;
     }
 
+    public static String getPosition() {
+        return voiture.getPosition();
+    }
+
     @Override
     public void run() {
         try {
@@ -47,7 +51,7 @@ public class Simulateur implements Runnable {
         }
     }
 
-    public static Response processRequest(String request) {
+    public static String processRequest(String request) {
         // Logique pour traiter la demande du client
         System.out.println("Processing client request: " + request);
         String position = null;
@@ -67,7 +71,7 @@ public class Simulateur implements Runnable {
             default:
                 System.out.println("Commande invalide : " + request);
         }
-        return Response.ok(position).build();
+        return position;
 
     }
 

@@ -17,7 +17,8 @@ public class Main {
         // Démarrer le thread de simulation continue
         Thread simulationThread = new Thread(simulateur);
 
-        simulationThread.start();
+        // simulationThread.start();
+
         Quarkus.run(args);
     }
 }

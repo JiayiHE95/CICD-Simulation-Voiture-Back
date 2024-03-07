@@ -43,7 +43,7 @@ public class Voiture {
 
     public String getPosition() {
         int[] positions = { positionX, positionY };
-        return "(" + positions[0] + "," + positions[1] + ")";
+        return positions[0] + "," + positions[1];
     }
 
 }
