@@ -4,37 +4,37 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-
-import java.util.concurrent.BlockingQueue;
+import jakarta.ws.rs.core.Response;
 
 @Path("/api/commands")
 @ApplicationScoped
 public class CommandController {
 
-
-
     @POST
     @Path("/avancer")
-    public void avancer() {
+    public Response avancer() {
         Simulateur.getClientRequests().offer("avancer");
-        System.out.println(Simulateur.getClientRequests());
+        return Simulateur.processRequest("avancer");
     }
 
     @POST
     @Path("/reculer")
-    public void reculer() {
+    public Response reculer() {
         Simulateur.getClientRequests().offer("reculer");
+        return Simulateur.processRequest("reculer");
     }
 
     @POST
     @Path("/monter")
-    public void monter() {
+    public Response monter() {
         Simulateur.getClientRequests().offer("monter");
+        return Simulateur.processRequest("monter");
     }
 
     @POST
     @Path("/descendre")
-    public void descendre() {
+    public Response descendre() {
         Simulateur.getClientRequests().offer("descendre");
+        return Simulateur.processRequest("descendre");
     }
 }

@@ -5,11 +5,12 @@ import jakarta.inject.Inject;
 import java.io.OutputStream;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
 public class Simulateur implements Runnable {
 
-    private final Voiture voiture;
+    private static Voiture voiture;
 
     public static BlockingQueue<String> getClientRequests() {
         return clientRequests;
@@ -17,9 +18,14 @@ public class Simulateur implements Runnable {
 
     private final static BlockingQueue<String> clientRequests = new LinkedBlockingQueue<>();
 
-    @Inject
-    public Simulateur() {
-        this.voiture = new Voiture("toto");
+    private static Simulateur simulateur;
+
+    public static Simulateur getSimulateur() {
+        if (simulateur == null) {
+            simulateur = new Simulateur();
+            voiture = new Voiture("toto");
+        }
+        return simulateur;
     }
 
     @Override
@@ -27,12 +33,9 @@ public class Simulateur implements Runnable {
         try {
             while (true) {
                 // Traitement des demandes clients
-                System.out.println("testetst" + getClientRequests());
                 String request = clientRequests.poll();
                 if (request != null) {
                     System.out.println("Simulateur received request: " + request);
-                    processRequest(request);
-                    Thread.sleep(100);
                 } else {
                     System.out.println("Simulateur received request: null");
                     Thread.sleep(1000);
@@ -44,7 +47,7 @@ public class Simulateur implements Runnable {
         }
     }
 
-    void processRequest(String request) {
+    public static Response processRequest(String request) {
         // Logique pour traiter la demande du client
         System.out.println("Processing client request: " + request);
         String position = null;
@@ -64,6 +67,8 @@ public class Simulateur implements Runnable {
             default:
                 System.out.println("Commande invalide : " + request);
         }
+        return Response.ok(position).build();
+
     }
 
 }
