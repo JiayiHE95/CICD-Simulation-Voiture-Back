@@ -17,6 +17,8 @@ public class Main {
         // Démarrer le thread de simulation continue
         Thread simulationThread = new Thread(simulateur);
 
+        WebSocketServer webSocketServer = new WebSocketServer();
+
         // simulationThread.start();
 
         Quarkus.run(args);
