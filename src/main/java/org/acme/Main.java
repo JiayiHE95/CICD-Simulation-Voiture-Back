@@ -20,6 +20,9 @@ public class Main {
 
         WebSocketServer webSocketServer = new WebSocketServer();
 
+
+        // simulationThread.start();
+
         Quarkus.run(args);
     }
 }

@@ -63,7 +63,7 @@ public class WebSocketServer {
     }
 
     private void broadcast(String message) {
-
+        System.out.println("je passe");
         sessions.values().forEach(s -> {
             s.getAsyncRemote().sendObject(message, result -> {
                 if (result.getException() != null) {
