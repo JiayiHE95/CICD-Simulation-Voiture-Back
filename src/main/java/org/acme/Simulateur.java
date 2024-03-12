@@ -54,7 +54,8 @@ public class Simulateur implements Runnable {
     public static String processRequest(String request) {
         // Logique pour traiter la demande du client
         System.out.println("Processing client request: " + request);
-        String position = null;
+        getClientRequests().offer(request);  // Enqueue the client request
+        String position = getPosition();
         switch (request) {
             case "avancer":
                 position = voiture.avancer();
@@ -67,6 +68,11 @@ public class Simulateur implements Runnable {
                 break;
             case "descendre":
                 position = voiture.descendre();
+                break;
+            case "crashMaison":
+                if(voiture.positionContientMaison()) {
+                    voiture.reinitialiserPosition();
+                }
                 break;
             default:
                 System.out.println("Commande invalide : " + request);

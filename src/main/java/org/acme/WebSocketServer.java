@@ -23,6 +23,7 @@ public class WebSocketServer {
     Map<String, Session> sessions = new ConcurrentHashMap<>();
 
     public WebSocketServer() {
+
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -52,9 +53,13 @@ public class WebSocketServer {
 
     @OnMessage
     public void onMessage(String message, @PathParam("username") String username) {
-        System.out.println("Received message from " + username + ": " + message);
+        System.out.println("Received message from " + username + ": " + message + Simulateur.getPosition());
         Simulateur.processRequest(message);
+
+        Simulateur.processRequest("crashMaison");
         broadcast(Simulateur.getPosition());
+
+
     }
 
     private void broadcast(String message) {
