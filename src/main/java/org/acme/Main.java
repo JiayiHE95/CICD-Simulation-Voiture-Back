@@ -1,5 +1,7 @@
 package org.acme;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -13,11 +15,14 @@ public class Main {
 
         // File d'attente pour les demandes clients
         Simulateur simulateur = Simulateur.getSimulateur();
-
         // Démarrer le thread de simulation continue
         Thread simulationThread = new Thread(simulateur);
 
-        simulationThread.start();
+        WebSocketServer webSocketServer = new WebSocketServer();
+
+
+        // simulationThread.start();
+
         Quarkus.run(args);
     }
 }

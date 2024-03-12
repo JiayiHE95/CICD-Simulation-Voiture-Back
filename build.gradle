@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'io.quarkus:quarkus-websockets'
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation 'io.quarkus:quarkus-resteasy-reactive'
     implementation 'io.quarkus:quarkus-arc'
@@ -24,6 +25,8 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured'
     testImplementation "io.quarkus:quarkus-jacoco"
 
+    implementation 'javax.websocket:javax.websocket-api:1.1'
+    implementation("io.quarkus:quarkus-websockets")
 
 
 }

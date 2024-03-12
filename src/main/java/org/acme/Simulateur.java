@@ -28,6 +28,10 @@ public class Simulateur implements Runnable {
         return simulateur;
     }
 
+    public static String getPosition() {
+        return voiture.getPosition();
+    }
+
     @Override
     public void run() {
         try {
@@ -47,10 +51,11 @@ public class Simulateur implements Runnable {
         }
     }
 
-    public static Response processRequest(String request) {
+    public static String processRequest(String request) {
         // Logique pour traiter la demande du client
         System.out.println("Processing client request: " + request);
-        String position = null;
+        getClientRequests().offer(request);  // Enqueue the client request
+        String position = getPosition();
         switch (request) {
             case "avancer":
                 position = voiture.avancer();
@@ -64,10 +69,15 @@ public class Simulateur implements Runnable {
             case "descendre":
                 position = voiture.descendre();
                 break;
+            case "crashMaison":
+                if(voiture.positionContientMaison()) {
+                    voiture.reinitialiserPosition();
+                }
+                break;
             default:
                 System.out.println("Commande invalide : " + request);
         }
-        return Response.ok(position).build();
+        return position;
 
     }
 
