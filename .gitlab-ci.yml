@@ -17,6 +17,7 @@ build-main:
   stage : build
   script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod 777 ./gradlew
     - ./gradlew build
   only:
   - main
