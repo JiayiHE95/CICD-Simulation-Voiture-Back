@@ -21,6 +21,13 @@ dependencies {
     implementation 'io.quarkus:quarkus-vertx-http-deployment'
 
 
+    implementation 'io.quarkus:quarkus-container-image-jib'
+    implementation 'io.quarkus:quarkus-kubernetes'
+    implementation 'io.quarkus:quarkus-smallrye-health'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+    implementation 'io.quarkus:quarkus-micrometer'
+
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
     testImplementation "io.quarkus:quarkus-jacoco"
