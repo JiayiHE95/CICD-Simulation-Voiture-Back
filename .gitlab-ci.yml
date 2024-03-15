@@ -13,7 +13,7 @@ test-back:
 
 
 build-main:
-  image : registry.access.redhat.com/ubi8/openjdk-17:1.18
+  image : gradle:jdk21
   stage : build
   script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
