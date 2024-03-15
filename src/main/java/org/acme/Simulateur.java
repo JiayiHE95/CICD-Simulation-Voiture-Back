@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 public class Simulateur implements Runnable {
 
     private static Voiture voiture;
+    private static Plateau plateau;
 
     public static BlockingQueue<String> getClientRequests() {
         return clientRequests;
@@ -24,6 +25,7 @@ public class Simulateur implements Runnable {
         if (simulateur == null) {
             simulateur = new Simulateur();
             voiture = new Voiture("toto");
+            plateau = new Plateau();
         }
         return simulateur;
     }
@@ -52,32 +54,37 @@ public class Simulateur implements Runnable {
     }
 
     public static String processRequest(String request) {
-        // Logique pour traiter la demande du client
+
         System.out.println("Processing client request: " + request);
-        getClientRequests().offer(request);  // Enqueue the client request
-        String position = getPosition();
+        getClientRequests().offer(request);
+
         switch (request) {
             case "avancer":
-                position = voiture.avancer();
+                voiture.avancer();
                 break;
             case "reculer":
-                position = voiture.reculer();
+                voiture.reculer();
                 break;
             case "monter":
-                position = voiture.monter();
+                voiture.monter();
                 break;
             case "descendre":
-                position = voiture.descendre();
-                break;
-            case "crashMaison":
-                if(voiture.positionContientMaison()) {
-                    voiture.reinitialiserPosition();
-                }
+                voiture.descendre();
                 break;
             default:
                 System.out.println("Commande invalide : " + request);
         }
-        return position;
+
+        System.out.println("verifie position");
+        if (plateau.positionContientMaison(voiture.getPositionX(), voiture.getPositionY())) {
+            System.out.println("crash maison");
+            voiture.reinitialiserPosition();
+        } else if (plateau.positionContientStation(voiture.getPositionX(), voiture.getPositionY())) {
+            System.out.println("recharge");
+            voiture.charger();
+        }
+
+        return getPosition();
 
     }
 

@@ -55,15 +55,11 @@ public class WebSocketServer {
     public void onMessage(String message, @PathParam("username") String username) {
         System.out.println("Received message from " + username + ": " + message + Simulateur.getPosition());
         Simulateur.processRequest(message);
-
-        Simulateur.processRequest("crashMaison");
         broadcast(Simulateur.getPosition());
-
 
     }
 
     private void broadcast(String message) {
-        System.out.println("je passe");
         sessions.values().forEach(s -> {
             s.getAsyncRemote().sendObject(message, result -> {
                 if (result.getException() != null) {
