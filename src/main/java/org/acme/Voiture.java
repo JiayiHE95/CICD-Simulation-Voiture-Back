@@ -80,20 +80,7 @@ public class Voiture {
         System.out.println("fin carburant: " + carburant + " compteurPas: " + compteurPas);
     }
 
-    public boolean positionContientMaison() {
-        for (int[] maison : maisonPositions) {
-            int maisonX = maison[0];
-            int maisonY = maison[1];
-            int largeurMaison = 4;
-            int hauteurMaison = 4;
-
-            if (positionX >= maisonX && positionX <= (maisonX + largeurMaison)
-                    && positionY >= maisonY && positionY <= (maisonY + hauteurMaison)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     public String getPosition() {
         int[] positions = { positionX, positionY };

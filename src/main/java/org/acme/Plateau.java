@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Plateau {
- private int largeurMaison = 4;
- private int hauteurMaison = 4;
+ private int largeurMaison = 25;
+ private int hauteurMaison = 25;
  private List<int[]> maisonPositions = new ArrayList<>();
  private List<int[]> stationPositions = new ArrayList<>();
 
@@ -25,9 +25,9 @@ public class Plateau {
   for (int[] maison : maisonPositions) {
    int maisonX = maison[0];
    int maisonY = maison[1];
-   if (x >= maisonX && x <= (maisonX + largeurMaison) && y >= maisonY && y <= (maisonY + hauteurMaison)) {
+   if (x >= (maisonX - largeurMaison) && x <= (maisonX + largeurMaison) && y >= (maisonY - hauteurMaison) && y <= (maisonY + hauteurMaison)) {
     return true;
-   }
+    }
   }
   return false;
  }
@@ -36,9 +36,9 @@ public class Plateau {
   for (int[] station : stationPositions) {
    int stationX = station[0];
    int stationY = station[1];
-   if (x >= stationX && x <= stationX + largeurMaison && y >= stationY && y <= stationY + hauteurMaison) {
+   if (x >= (stationX - 10) && x <= (stationX + 10) && y >= (stationY - 10) && y <= (stationY + 10)) {
     return true;
-   }
+    }
   }
   return false;
  }

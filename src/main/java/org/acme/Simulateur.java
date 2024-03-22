@@ -12,6 +12,7 @@ public class Simulateur implements Runnable {
 
     private static Voiture voiture;
     private static Plateau plateau;
+    private static Boule boule;
 
     public static BlockingQueue<String> getClientRequests() {
         return clientRequests;
@@ -26,12 +27,14 @@ public class Simulateur implements Runnable {
             simulateur = new Simulateur();
             voiture = new Voiture("toto");
             plateau = new Plateau();
+            boule = new Boule();
         }
         return simulateur;
     }
 
     public static String getPosition() {
-        return voiture.getPosition();
+        boule.mouvement();
+        return voiture.getPosition() + boule.getPosition();
     }
 
     @Override
