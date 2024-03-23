@@ -7,8 +7,10 @@ public class Voiture {
     private final String nom;
     private int positionX = 0;
     private int positionY = 0;
-    private int carburant = 60;
+    private int carburant = 100;
     private int compteurPas = 3;
+    private int score = 0;
+
 
     List<int[]> maisonPositions = new ArrayList<>();
 
@@ -72,6 +74,7 @@ public class Voiture {
             if (carburant == 0) {
                 reinitialiserPosition();
                 this.carburant = 60;
+                setScore(0);
             }
         } else {
             compteurPas = compteurPas - 1;
@@ -90,14 +93,23 @@ public class Voiture {
     public int getPositionX() {
         return positionX;
     }
+    public int getCarburant() {
+        return carburant;
+    }
 
     public int getPositionY() {
         return positionY;
     }
+    public int getScore() {
+        return score;
+    }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public void charger() {
-        if (this.carburant >= 40) {
-            this.carburant = 60;
+        if (this.carburant >= 80) {
+            this.carburant = 100;
         } else {
             this.carburant += 20;
         }

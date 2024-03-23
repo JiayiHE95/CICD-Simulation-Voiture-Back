@@ -34,7 +34,10 @@ public class Simulateur implements Runnable {
 
     public static String getPosition() {
         boule.mouvement();
-        return voiture.getPosition() + boule.getPosition();
+        if (boule.positionContientBoule(voiture.getPositionX(), voiture.getPositionY())){
+            voiture.setScore(voiture.getScore() + 1);
+        }
+        return voiture.getPosition() + boule.getPosition() + ","+ voiture.getCarburant() + ","+ voiture.getScore();
     }
 
     @Override
@@ -81,6 +84,7 @@ public class Simulateur implements Runnable {
         System.out.println("verifie position");
         if (plateau.positionContientMaison(voiture.getPositionX(), voiture.getPositionY())) {
             System.out.println("crash maison");
+            voiture.setScore(0);
             voiture.reinitialiserPosition();
         } else if (plateau.positionContientStation(voiture.getPositionX(), voiture.getPositionY())) {
             System.out.println("recharge");
