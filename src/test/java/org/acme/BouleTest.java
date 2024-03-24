@@ -68,15 +68,24 @@ class BouleTest {
     
     @Test
     void testPositionContientBoule() {
+        
         assertTrue(boule.positionContientBoule(0, 0));
+        
+        
         assertFalse(boule.positionContientBoule(10, 10));
+
         
         boule.mouvement();
         assertTrue(boule.positionContientBoule(10, 0));
         assertFalse(boule.positionContientBoule(20, 0));
         
+        
         boule.mouvement();
         assertTrue(boule.positionContientBoule(20, 0));
         assertFalse(boule.positionContientBoule(30, 0));
+
+        
+        assertFalse(boule.positionContientBoule(495, 0));
+        assertFalse(boule.positionContientBoule(0, 295));
     }
 }
