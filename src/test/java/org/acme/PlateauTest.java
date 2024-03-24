@@ -17,7 +17,7 @@ class PlateauTest {
     }
 
     @Test
-    public void testPositionContientMaison() {
+    void testPositionContientMaison() {
         // Test avec une position qui contient une maison
         assertTrue(plateau.positionContientMaison(405, 95));
         
@@ -26,7 +26,7 @@ class PlateauTest {
     }
 
     @Test
-    public void testPositionContientStation() {
+    void testPositionContientStation() {
         // Test avec une position qui contient une station
         assertTrue(plateau.positionContientStation(205, 255));
         
@@ -37,13 +37,13 @@ class PlateauTest {
  
 
     @Test
-    public void testPositionContientMaisonInvalide() {
+    void testPositionContientMaisonInvalide() {
         // Test avec une position en dehors de toutes les maisons
         assertFalse(plateau.positionContientMaison(0, 0));
     }
 
     @Test
-    public void testPositionContientStationInvalide() {
+    void testPositionContientStationInvalide() {
         // Test avec une position en dehors de toutes les stations
         assertFalse(plateau.positionContientStation(0, 0));
     }
