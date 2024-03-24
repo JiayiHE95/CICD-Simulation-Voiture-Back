@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class BouleTest {
+class BouleTest {
 
     private Boule boule;
 
@@ -31,16 +31,38 @@ public class BouleTest {
     }
 
     @Test
-    public void testMouvementDirectionDroite() {
+    public void testMouvement_HorizontalMove() {
         boule.mouvement();
         assertEquals(10, boule.getPositionX());
         assertEquals(0, boule.getPositionY());
+
         boule.mouvement();
         assertEquals(20, boule.getPositionX());
         assertEquals(0, boule.getPositionY());
+
+        boule.setPositionX(490);  
         boule.mouvement();
-        assertEquals(30, boule.getPositionX());
+        assertEquals(0, boule.getPositionX());  
+        assertEquals(20, boule.getPositionY());
+    }
+
+    @Test
+    public void testMouvement_VerticalMove() {
+        boule.setPositionX(boule.largeurPlateau);  
+        boule.mouvement();
+        assertEquals(0, boule.getPositionX());
+        assertEquals(20, boule.getPositionY());
+
+        boule.mouvement();
+        assertEquals(10, boule.getPositionX());
+        assertEquals(20, boule.getPositionY());
+
+        boule.setPositionX(boule.largeurPlateau);
+        boule.setPositionY(290);  
+        boule.mouvement();
+        assertEquals(0, boule.getPositionX());
         assertEquals(0, boule.getPositionY());
+        
     }
 
     
