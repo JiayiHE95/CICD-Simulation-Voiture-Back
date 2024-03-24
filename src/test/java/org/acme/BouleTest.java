@@ -40,15 +40,15 @@ class BouleTest {
         assertEquals(20, boule.getPositionX());
         assertEquals(0, boule.getPositionY());
 
-        boule.setPositionX(490);  
+        boule.setPositionX(490);
         boule.mouvement();
-        assertEquals(0, boule.getPositionX());  
+        assertEquals(0, boule.getPositionX());
         assertEquals(20, boule.getPositionY());
     }
 
     @Test
     void testMouvement_VerticalMove() {
-        boule.setPositionX(boule.largeurPlateau);  
+        boule.setPositionX(Boule.LARGEUR_PLATEAU);
         boule.mouvement();
         assertEquals(0, boule.getPositionX());
         assertEquals(20, boule.getPositionY());
@@ -57,34 +57,29 @@ class BouleTest {
         assertEquals(10, boule.getPositionX());
         assertEquals(20, boule.getPositionY());
 
-        boule.setPositionX(boule.largeurPlateau);
-        boule.setPositionY(290);  
+        boule.setPositionX(Boule.LARGEUR_PLATEAU);
+        boule.setPositionY(290);
         boule.mouvement();
         assertEquals(0, boule.getPositionX());
         assertEquals(0, boule.getPositionY());
-        
+
     }
 
-    
     @Test
     void testPositionContientBoule() {
-        
+
         assertTrue(boule.positionContientBoule(0, 0));
-        
-        
+
         assertFalse(boule.positionContientBoule(10, 10));
 
-        
         boule.mouvement();
         assertTrue(boule.positionContientBoule(10, 0));
         assertFalse(boule.positionContientBoule(20, 0));
-        
-        
+
         boule.mouvement();
         assertTrue(boule.positionContientBoule(20, 0));
         assertFalse(boule.positionContientBoule(30, 0));
 
-        
         assertFalse(boule.positionContientBoule(495, 0));
         assertFalse(boule.positionContientBoule(0, 295));
     }

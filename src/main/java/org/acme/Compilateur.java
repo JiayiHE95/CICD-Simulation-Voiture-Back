@@ -1,10 +1,17 @@
 package org.acme;
 
 import java.nio.file.Paths;
+
 import java.io.*;
 
+import java.util.logging.*;
+
 public class Compilateur {
+
   public static void main(String... args) {
+
+    Logger logger = Logger.getLogger(Compilateur.class.getName());
+
     String absolutePath = Paths.get(".").toAbsolutePath().normalize().toString();
     absolutePath += "\\src\\main\\java\\org\\acme\\";
 
@@ -12,17 +19,24 @@ public class Compilateur {
     String outputFileName = "Compile.java";
     String inputFilePath = absolutePath + inputFileName;
     String outputFilePath = absolutePath + outputFileName;
-    String beginning = "package org.acme;\n" +
-        "public class Compile {\n" +
-        "    int position = 0;\n" +
-        "    public void move(String direction) {\n" +
-        "        switch (direction) {\n";
-    String ending = "        default:\n" +
-        "            System.out.println(\"Mauvaise direction\");\n" +
-        "            break;\n" +
-        "       }\n" +
-        "    }\n" +
-        "}\n";
+    String beginning = """
+            package org.acme;
+
+            public class Compile {
+                int position = 0;
+
+                public void move(String direction) {
+                    switch (direction) {
+        """;
+
+    String ending = """
+            default:
+                System.out.println("Mauvaise direction");
+                break;
+          }
+        }
+        }
+        """;
 
     try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
         BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath))) {
@@ -32,13 +46,13 @@ public class Compilateur {
         try {
           compileLine(line, writer);
         } catch (IOException e) {
-          e.printStackTrace();
+          logger.info("Erreur lors de la compilation : " + e.getMessage());
         }
       });
       writer.write(ending);
 
     } catch (IOException e) {
-      System.err.println("Erreur lors de la compilation : " + e.getMessage());
+      logger.info("Erreur lors de la compilation : " + e.getMessage());
     }
   }
 
@@ -48,14 +62,16 @@ public class Compilateur {
     String instruction = "";
     switch (key) {
       case "avancer":
-        instruction = "        case \"avancer\":\n" +
-            "            position = position + 1;\n" +
-            "            break;\n";
+        instruction = """
+            case \"avancer\":
+                position = position + 1;
+                break;\n""";
         break;
       case "reculer":
-        instruction = "        case \"reculer\":\n" +
-            "            position = position - 1;\n" +
-            "            break;\n";
+        instruction = """
+            case \"reculer\":
+                position = position - 1;
+                break;\n""";
         break;
       default:
         break;

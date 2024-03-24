@@ -2,7 +2,7 @@ package org.acme;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
+import java.util.logging.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,6 +19,7 @@ import jakarta.websocket.Session;
 @ApplicationScoped
 public class WebSocketServer {
     private Timer timer;
+    private Logger logger = Logger.getLogger(Compilateur.class.getName());
     Map<String, Session> sessions = new ConcurrentHashMap<>();
 
     public WebSocketServer() {
@@ -34,20 +35,20 @@ public class WebSocketServer {
 
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) {
-        broadcast("User " + username + " joined");
+        broadcast(username + " joined");
         sessions.put(username, session);
     }
 
     @OnClose
     public void onClose(Session session, @PathParam("username") String username) {
         sessions.remove(username);
-        broadcast("User " + username + " left");
+        broadcast(username + " left");
     }
 
     @OnError
     public void onError(Session session, @PathParam("username") String username, Throwable throwable) {
         sessions.remove(username);
-        broadcast("User " + username + " left on error: " + throwable);
+        broadcast(username + " left on error: " + throwable);
     }
 
     @OnMessage
@@ -58,13 +59,11 @@ public class WebSocketServer {
     }
 
     private void broadcast(String message) {
-        sessions.values().forEach(s -> {
-            s.getAsyncRemote().sendObject(message, result -> {
-                if (result.getException() != null) {
-                    System.out.println("Unable to send message: " + result.getException());
-                }
-            });
-        });
+        sessions.values().forEach(s -> s.getAsyncRemote().sendObject(message, result -> {
+            if (result.getException() != null) {
+                logger.info("Unable to send message: " + result.getException());
+            }
+        }));
     }
 
 }

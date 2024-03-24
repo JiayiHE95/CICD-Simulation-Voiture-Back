@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Voiture {
-    private int positionX = 0;
-    private int positionY = 0;
+    private int positionX, positionY, score = 0;
     private int carburant = 100;
     private int compteurPas = 3;
-    private int score = 0;
     private String errorcadre = "hors du cadre";
 
     List<int[]> maisonPositions = new ArrayList<>();
@@ -78,8 +76,6 @@ public class Voiture {
 
     }
 
-    
-
     public String getPosition() {
         int[] positions = { positionX, positionY };
         return positions[0] + "," + positions[1];
@@ -88,6 +84,7 @@ public class Voiture {
     public int getPositionX() {
         return positionX;
     }
+
     public int getCarburant() {
         return carburant;
     }
@@ -95,9 +92,11 @@ public class Voiture {
     public int getPositionY() {
         return positionY;
     }
+
     public int getScore() {
         return score;
     }
+
     public void setScore(int score) {
         this.score = score;
     }
@@ -107,13 +106,14 @@ public class Voiture {
     }
 
     public void setPositionX(int i) {
-       positionX = i;
+        positionX = i;
     }
 
     public void setPositionY(int i) {
         positionY = i;
     }
-    public void setCarburant(int i){
+
+    public void setCarburant(int i) {
         carburant = i;
     }
 
