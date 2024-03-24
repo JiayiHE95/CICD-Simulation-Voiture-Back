@@ -4,7 +4,6 @@ public class Boule {
     private int positionX = 0;
     private int positionY = 0;
     private final int LARGEUR_PLATEAU = 490;
-    private final int HAUTEUR_PLATEAU = 300;
     private boolean directionDroite = true; // Indique si la boule se déplace vers la droite
     
     public String getPosition() {

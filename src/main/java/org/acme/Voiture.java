@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Voiture {
-    private final String nom;
     private int positionX = 0;
     private int positionY = 0;
     private int carburant = 100;
@@ -14,8 +13,7 @@ public class Voiture {
 
     List<int[]> maisonPositions = new ArrayList<>();
 
-    public Voiture(String name) {
-        this.nom = name;
+    public Voiture() {
         maisonPositions.add(new int[] { 400, 90 });
         maisonPositions.add(new int[] { 100, 100 });
         maisonPositions.add(new int[] { 450, 150 });
@@ -66,8 +64,6 @@ public class Voiture {
     }
 
     public void consommerCarburant() {
-        System.out.println("debut carburant: " + carburant + " compteurPas: " + compteurPas);
-
         if (compteurPas == 1) {
             carburant = carburant - 1;
             compteurPas = 3;
@@ -80,7 +76,6 @@ public class Voiture {
             compteurPas = compteurPas - 1;
         }
 
-        System.out.println("fin carburant: " + carburant + " compteurPas: " + compteurPas);
     }
 
     
@@ -108,11 +103,17 @@ public class Voiture {
     }
 
     public void charger() {
-        if (this.carburant >= 80) {
-            this.carburant = 100;
-        } else {
-            this.carburant += 20;
-        }
+        carburant = 100;
     }
 
+    public void setPositionX(int i) {
+       positionX = i;
+    }
+
+    public void setPositionY(int i) {
+        positionY = i;
+    }
+    public void setCarburant(int i){
+        carburant = i;
+    }
 }

@@ -1,6 +1,5 @@
 package org.acme;
 
-import java.io.Console;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -53,7 +52,6 @@ public class WebSocketServer {
 
     @OnMessage
     public void onMessage(String message, @PathParam("username") String username) {
-        System.out.println("Received message from " + username + ": " + message + Simulateur.getPosition());
         Simulateur.processRequest(message);
         broadcast(Simulateur.getPosition());
 

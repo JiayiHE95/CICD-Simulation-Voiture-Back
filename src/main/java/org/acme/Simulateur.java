@@ -1,31 +1,20 @@
 package org.acme;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import java.io.OutputStream;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
-public class Simulateur implements Runnable {
+public class Simulateur  {
 
     private static Voiture voiture;
     private static Plateau plateau;
     private static Boule boule;
-
-    public static BlockingQueue<String> getClientRequests() {
-        return clientRequests;
-    }
-
-    private final static BlockingQueue<String> clientRequests = new LinkedBlockingQueue<>();
 
     private static Simulateur simulateur;
 
     public static Simulateur getSimulateur() {
         if (simulateur == null) {
             simulateur = new Simulateur();
-            voiture = new Voiture("toto");
+            voiture = new Voiture();
             plateau = new Plateau();
             boule = new Boule();
         }
@@ -40,29 +29,11 @@ public class Simulateur implements Runnable {
         return voiture.getPosition() + boule.getPosition() + ","+ voiture.getCarburant() + ","+ voiture.getScore();
     }
 
-    @Override
-    public void run() {
-        try {
-            while (true) {
-                // Traitement des demandes clients
-                String request = clientRequests.poll();
-                if (request != null) {
-                    System.out.println("Simulateur received request: " + request);
-                } else {
-                    System.out.println("Simulateur received request: null");
-                    Thread.sleep(1000);
-                }
-                System.out.println(voiture.getPosition());
-            }
-        } catch (InterruptedException e) {
-            // Le thread a été interrompu (par exemple, à la fermeture de l'application)
-        }
+    public static Voiture getVoiture(){
+        return voiture;
     }
 
     public static String processRequest(String request) {
-
-        System.out.println("Processing client request: " + request);
-        getClientRequests().offer(request);
 
         switch (request) {
             case "avancer":
@@ -81,13 +52,12 @@ public class Simulateur implements Runnable {
                 System.out.println("Commande invalide : " + request);
         }
 
-        System.out.println("verifie position");
         if (plateau.positionContientMaison(voiture.getPositionX(), voiture.getPositionY())) {
-            System.out.println("crash maison");
+            
             voiture.setScore(0);
             voiture.reinitialiserPosition();
         } else if (plateau.positionContientStation(voiture.getPositionX(), voiture.getPositionY())) {
-            System.out.println("recharge");
+            
             voiture.charger();
         }
 
