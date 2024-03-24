@@ -24,9 +24,9 @@ public class Compilateur {
         "    }\n" +
         "}\n";
 
-    try {
-      BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
-      BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath));
+    try (BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(outputFilePath))) {
+
       writer.write(beginning);
       reader.lines().forEach(line -> {
         try {
@@ -35,17 +35,14 @@ public class Compilateur {
           e.printStackTrace();
         }
       });
-      reader.close();
       writer.write(ending);
-      writer.close();
 
     } catch (IOException e) {
       System.err.println("Erreur lors de la compilation : " + e.getMessage());
     }
-
   }
 
-  public static void compileLine(String line, BufferedWriter writer) throws IOException {
+  public static String compileLine(String line, BufferedWriter writer) throws IOException {
     String[] words = line.split(" ");
     String key = words[0];
     String instruction = "";
@@ -64,6 +61,6 @@ public class Compilateur {
         break;
     }
     writer.write(instruction);
+    return instruction;
   }
-
 }
