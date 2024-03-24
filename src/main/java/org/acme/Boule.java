@@ -3,7 +3,7 @@ package org.acme;
 public class Boule {
     private int positionX = 0;
     private int positionY = 0;
-    public int largeurPlateau = 490;
+    public static final int largeurPlateau = 490;
     
     public String getPosition() {
         return "," +positionX + "," + positionY;
