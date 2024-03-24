@@ -13,7 +13,7 @@ class SimulateurTest {
 
     @BeforeEach
     void setUp() {
-        simulateur = Simulateur.getSimulateur();
+        simulateur = Simulateur.getInstance();
         voiture = simulateur.getVoiture();
         boule = simulateur.getBoule();
 

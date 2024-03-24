@@ -19,7 +19,7 @@ import jakarta.websocket.Session;
 @ApplicationScoped
 public class WebSocketServer {
     private Timer timer;
-    private Logger logger = Logger.getLogger(WebSocketServer.class.getName());
+    Logger logger = Logger.getLogger(WebSocketServer.class.getName());
     Map<String, Session> sessions = new ConcurrentHashMap<>();
 
     public WebSocketServer() {
@@ -58,7 +58,7 @@ public class WebSocketServer {
 
     }
 
-    private void broadcast(String message) {
+    void broadcast(String message) {
         sessions.values().forEach(s -> s.getAsyncRemote().sendObject(message, result -> {
             if (result.getException() != null) {
                 logger.info("Unable to send message: " + result.getException());

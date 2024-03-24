@@ -1,25 +1,26 @@
 package org.acme;
 
 import java.util.logging.Logger;
+
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class Simulateur {
 
-    private static Voiture voiture;
-    private static Plateau plateau;
-    private static Boule boule;
+    private static Voiture voiture = new Voiture();
+    private static Plateau plateau = new Plateau();
+    private static Boule boule = new Boule();
     private static Logger logger = Logger.getLogger(Simulateur.class.getName());
-    private static final Simulateur simulateur = new Simulateur();
-
-    public static Simulateur getSimulateur() {
-        return simulateur;
-    }
+    private static Simulateur simulateur = null;
 
     private Simulateur() {
-        voiture = new Voiture();
-        plateau = new Plateau();
-        boule = new Boule();
+    }
+
+    public static Simulateur getInstance() {
+        if (simulateur == null) {
+            simulateur = new Simulateur();
+        }
+        return simulateur;
     }
 
     public static String getPosition() {
@@ -49,7 +50,7 @@ public class Simulateur {
                 voiture.descendre();
                 break;
             default:
-                logger.info("Commande invalide : " + request);
+                logger.fine("Commande invalide");
         }
 
         if (plateau.positionContientMaison(voiture.getPositionX(), voiture.getPositionY())) {

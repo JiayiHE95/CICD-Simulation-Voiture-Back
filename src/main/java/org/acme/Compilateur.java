@@ -62,16 +62,10 @@ public class Compilateur {
     String instruction = "";
     switch (key) {
       case "avancer":
-        instruction = """
-            case "avancer":
-                position = position + 1;
-                break;\n""";
+        instruction = "case \"avancer\":\nposition = position + 1;\nbreak;\n";
         break;
       case "reculer":
-        instruction = """
-            case "reculer":
-                position = position - 1;
-                break;\n""";
+        instruction = "case \"reculer\":\nposition = position - 1;\nbreak;\n";
         break;
       default:
         break;

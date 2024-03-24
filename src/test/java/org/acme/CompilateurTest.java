@@ -1,41 +1,31 @@
 package org.acme;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import java.io.*;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompilateurTest {
 
-  @Test
-  void testCompileLineAvancer() throws IOException {
+  @ParameterizedTest
+  @MethodSource("instructionProvider")
+  void testCompileLine(String input, String expectedOutput) throws IOException {
     StringWriter stringWriter = new StringWriter();
     BufferedWriter writer = new BufferedWriter(stringWriter);
-    String instruction = Compilateur.compileLine("avancer 1", writer);
-    assertEquals("case \"avancer\":\n" +
-        "    position = position + 1;\n" +
-        "    break;\n", instruction);
+    String instruction = Compilateur.compileLine(input, writer);
+    assertEquals(expectedOutput, instruction);
     writer.close();
   }
 
-  @Test
-  void testCompileLineReculer() throws IOException {
-    StringWriter stringWriter = new StringWriter();
-    BufferedWriter writer = new BufferedWriter(stringWriter);
-    String instruction = Compilateur.compileLine("reculer 1", writer);
-    assertEquals("case \"reculer\":\n" +
-        "    position = position - 1;\n" +
-        "    break;\n", instruction);
-    writer.close();
-  }
-
-  @Test
-  void testCompileLineDefault() throws IOException {
-    StringWriter stringWriter = new StringWriter();
-    BufferedWriter writer = new BufferedWriter(stringWriter);
-    String instruction = Compilateur.compileLine("autre 1", writer);
-    assertEquals("", instruction);
-    writer.close();
+  private static Stream<Object[]> instructionProvider() {
+    return Stream.of(
+        new Object[] { "avancer", "case \"avancer\":\nposition = position + 1;\nbreak;\n" },
+        new Object[] { "reculer", "case \"reculer\":\nposition = position - 1;\nbreak;\n" },
+        new Object[] { "autre", "" });
   }
 
   @Test
@@ -43,6 +33,10 @@ class CompilateurTest {
     String[] args = {};
     Compilateur.main(args);
     assertTrue(new File("src/main/java/org/acme/Compile.java").exists());
+    File file = new File("src/main/java/org/acme/Compile.java");
+    if (file.exists()) {
+      file.delete();
+    }
   }
 
 }
