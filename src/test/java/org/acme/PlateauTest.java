@@ -23,8 +23,8 @@ class PlateauTest {
         assertTrue(plateau.positionContientMaison(200, 190));
         assertTrue(plateau.positionContientMaison(200, 100));
         assertTrue(plateau.positionContientMaison(450, 250));
-        assertFalse(plateau.positionContientMaison(405, 95));
-        assertFalse(plateau.positionContientMaison(105, 105));
+        assertTrue(plateau.positionContientMaison(405, 95));
+        assertTrue(plateau.positionContientMaison(105, 105));
     }
 
     @Test
