@@ -62,6 +62,8 @@ sonar {
         property "sonar.projectKey", "projet4"
         property "sonar.token", "sqp_d54ffd8f16894a86c357bfdf98373e5145af0d7f"
         property "sonar.projectName", "projet4"
+        property "sonar.login", "polytech"
+        property "sonar.password", "azerty123456"
         property "sonar.qualitygate.wait", true
         property "sonar.host.url", "https://sonar.home.lange.xyz"
         tasks.jacocoTestReport.configure {
