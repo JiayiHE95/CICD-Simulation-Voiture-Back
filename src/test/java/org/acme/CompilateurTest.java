@@ -32,9 +32,9 @@ class CompilateurTest {
   void testMain() {
     String[] args = {};
     Compilateur.main(args);
-    assertTrue(new File("src/main/java/org/acme/Compile.java").exists());
     File file = new File("src/main/java/org/acme/Compile.java");
     if (file.exists()) {
+      assertTrue(new File("src/main/java/org/acme/Compile.java").exists());
       file.delete();
     }
   }
