@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Plateau {
-  private int largeurMaison, hauteurMaison = 25;
+  private int largeurMaison = 25;
+  private int hauteurMaison = 25;
   private List<int[]> maisonPositions = new ArrayList<>();
   private List<int[]> stationPositions = new ArrayList<>();
 

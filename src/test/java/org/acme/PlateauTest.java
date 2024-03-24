@@ -39,13 +39,11 @@ class PlateauTest {
 
     @Test
     void testPositionContientMaisonInvalide() {
-        // Test avec une position en dehors de toutes les maisons
         assertFalse(plateau.positionContientMaison(0, 0));
     }
 
     @Test
     void testPositionContientStationInvalide() {
-        // Test avec une position en dehors de toutes les stations
         assertFalse(plateau.positionContientStation(0, 0));
     }
 }

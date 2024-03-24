@@ -63,13 +63,13 @@ public class Compilateur {
     switch (key) {
       case "avancer":
         instruction = """
-            case \"avancer\":
+            case "avancer":
                 position = position + 1;
                 break;\n""";
         break;
       case "reculer":
         instruction = """
-            case \"reculer\":
+            case "reculer":
                 position = position - 1;
                 break;\n""";
         break;

@@ -19,7 +19,7 @@ import jakarta.websocket.Session;
 @ApplicationScoped
 public class WebSocketServer {
     private Timer timer;
-    private Logger logger = Logger.getLogger(Compilateur.class.getName());
+    private Logger logger = Logger.getLogger(WebSocketServer.class.getName());
     Map<String, Session> sessions = new ConcurrentHashMap<>();
 
     public WebSocketServer() {

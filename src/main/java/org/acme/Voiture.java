@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Voiture {
-    private int positionX, positionY, score = 0;
+    private int positionX = 0;
+    private int positionY = 0;
     private int carburant = 100;
     private int compteurPas = 3;
+    private int score = 0;
     private String errorcadre = "hors du cadre";
 
     List<int[]> maisonPositions = new ArrayList<>();

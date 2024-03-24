@@ -33,11 +33,7 @@ public class Boule {
     }
 
     public boolean positionContientBoule(int x, int y) {
-        if (x >= (positionX - 5) && x <= (positionX + 5) && y >= (positionY - 5) && y <= (positionY + 5)) {
-            return true;
-        }
-
-        return false;
+        return x >= (positionX - 5) && x <= (positionX + 5) && y >= (positionY - 5) && y <= (positionY + 5);
     }
 
     public void setPositionX(int i) {

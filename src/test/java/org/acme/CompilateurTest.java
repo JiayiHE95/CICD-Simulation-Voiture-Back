@@ -38,4 +38,11 @@ class CompilateurTest {
     writer.close();
   }
 
+  @Test
+  void testMain() {
+    String[] args = {};
+    Compilateur.main(args);
+    assertTrue(new File("src/main/java/org/acme/Compile.java").exists());
+  }
+
 }
