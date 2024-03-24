@@ -9,7 +9,7 @@ public class Voiture {
     private int carburant = 100;
     private int compteurPas = 3;
     private int score = 0;
-
+    private String errorcadre = "hors du cadre";
 
     List<int[]> maisonPositions = new ArrayList<>();
 
@@ -24,7 +24,7 @@ public class Voiture {
 
     public String avancer() {
         if ((positionX + 5) > 490) {
-            return "nope hors du cadre";
+            return errorcadre;
         }
         positionX = positionX + 5;
         consommerCarburant();
@@ -33,7 +33,7 @@ public class Voiture {
 
     public String reculer() {
         if ((positionX - 5) < 0) {
-            return "nope hors du cadre";
+            return errorcadre;
         }
         positionX = positionX - 5;
         consommerCarburant();
@@ -42,7 +42,7 @@ public class Voiture {
 
     public String monter() {
         if ((positionY + 5) > 290) {
-            return "nope hors du cadre";
+            return errorcadre;
         }
         positionY = positionY + 5;
         consommerCarburant();
@@ -51,7 +51,7 @@ public class Voiture {
 
     public String descendre() {
         if ((positionY - 5) < 0) {
-            return "nope hors du cadre";
+            return errorcadre;
         }
         positionY = positionY - 5;
         consommerCarburant();

@@ -10,28 +10,28 @@ class BouleTest {
     private Boule boule;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         boule = new Boule();
     }
 
     @Test
-    public void testGetPosition() {
+    void testGetPosition() {
         String position = boule.getPosition();
         assertEquals(",0,0", position);
     }
 
     @Test
-    public void testGetPositionX() {
+    void testGetPositionX() {
         assertEquals(0, boule.getPositionX());
     }
 
     @Test
-    public void testGetPositionY() {
+    void testGetPositionY() {
         assertEquals(0, boule.getPositionY());
     }
 
     @Test
-    public void testMouvement_HorizontalMove() {
+    void testMouvement_HorizontalMove() {
         boule.mouvement();
         assertEquals(10, boule.getPositionX());
         assertEquals(0, boule.getPositionY());
@@ -47,7 +47,7 @@ class BouleTest {
     }
 
     @Test
-    public void testMouvement_VerticalMove() {
+    void testMouvement_VerticalMove() {
         boule.setPositionX(boule.largeurPlateau);  
         boule.mouvement();
         assertEquals(0, boule.getPositionX());
@@ -67,7 +67,7 @@ class BouleTest {
 
     
     @Test
-    public void testPositionContientBoule() {
+    void testPositionContientBoule() {
         assertTrue(boule.positionContientBoule(0, 0));
         assertFalse(boule.positionContientBoule(10, 10));
         
