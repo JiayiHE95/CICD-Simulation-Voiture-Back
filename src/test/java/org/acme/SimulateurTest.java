@@ -8,15 +8,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SimulateurTest {
+class SimulateurTest {
 
     private Simulateur simulateur;
     private Voiture voiture;
+    private Boule boule;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         simulateur = Simulateur.getSimulateur();
         voiture = simulateur.getVoiture();
+        boule = simulateur.getBoule();
 
         voiture.setPositionX(0);
         voiture.setPositionY(0);
@@ -24,45 +26,67 @@ public class SimulateurTest {
     }
 
     @Test
-    public void testGetPosition() {
+    public void testGetBoule() {
+        assertNotNull(boule); 
+    }
+
+    @Test
+    public void testGetBouleInstance() {
+        assertSame(boule, simulateur.getBoule());  
+    }
+
+    @Test
+    void testGetPosition() {
         String position = Simulateur.getPosition();
         assertNotNull(position);
     }
 
     @Test
-    public void testProcessRequestAvancer() {
+    public void testGetPositionUpdatesScoreWhenBallContainsCar() {
+        boule.setPositionX(voiture.getPositionX()-10);
+        boule.setPositionY(voiture.getPositionY());
+
+        int initialScore = voiture.getScore();
+
+        simulateur.getPosition();
+
+        assertEquals(initialScore + 1, voiture.getScore());
+    }
+
+    @Test
+    void testProcessRequestAvancer() {
         Simulateur.processRequest("avancer");
         assertEquals("5,0", voiture.getPosition()); 
     }
     
 
     @Test
-    public void testProcessRequestReculerBlocage() {
+    void testProcessRequestReculerBlocage() {
         Simulateur.processRequest("reculer");
         assertEquals("0,0", voiture.getPosition()); 
     }
 
     @Test
-    public void testProcessRequestReculer() {
+    void testProcessRequestReculer() {
         voiture.setPositionX(10);
         Simulateur.processRequest("reculer");
         assertEquals("5,0", voiture.getPosition()); 
     }
 
     @Test
-    public void testProcessRequestMonter() {
+    void testProcessRequestMonter() {
         Simulateur.processRequest("monter");
         assertEquals("0,5", voiture.getPosition()); 
     }
 
     @Test
-    public void testProcessRequestDescendreBlocage() {
+    void testProcessRequestDescendreBlocage() {
         Simulateur.processRequest("descendre");
         assertEquals("0,0", voiture.getPosition()); 
     }
 
     @Test
-    public void testProcessRequestDescendre() {
+    void testProcessRequestDescendre() {
         
         voiture.setPositionY(10);
         Simulateur.processRequest("descendre");
@@ -70,13 +94,13 @@ public class SimulateurTest {
     }
 
     @Test
-    public void testProcessRequestInvalidCommand() {
+    void testProcessRequestInvalidCommand() {
         Simulateur.processRequest("invalid");
         assertEquals("0,0", voiture.getPosition()); 
     }
 
     @Test
-    public void testProcessRequestCrashMaison() {
+    void testProcessRequestCrashMaison() {
         // Set initial position inside a maison
         voiture.setPositionX(400);
         voiture.setPositionY(90);
@@ -86,7 +110,7 @@ public class SimulateurTest {
     }
 
     @Test
-    public void testProcessRequestRecharge() {
+    void testProcessRequestRecharge() {
         // Set initial position inside a station
         voiture.setPositionX(200);
         voiture.setPositionY(250);

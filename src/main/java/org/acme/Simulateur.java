@@ -64,5 +64,9 @@ public class Simulateur  {
         return getPosition();
 
     }
+    
+    public Boule getBoule() {
+        return boule;
+    }
 
 }
