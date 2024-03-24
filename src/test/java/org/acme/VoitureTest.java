@@ -8,12 +8,10 @@ import org.junit.jupiter.api.Test;
 public class VoitureTest {
 
     private Voiture voiture;
-    private Plateau plateau;
 
     @BeforeEach
     public void setUp() {
         voiture = new Voiture();
-        plateau = new Plateau();
     }
 
     @Test
@@ -129,5 +127,55 @@ public class VoitureTest {
     @Test
     public void testPositionY() {
         assertEquals(0, voiture.getPositionY());
+    }
+    @Test
+    public void testConsommerCarburant_DecrementWhenCompteurPasIs1() {
+        voiture.setCarburant(10);
+        voiture.setCompteurPas(1);
+        
+        voiture.consommerCarburant();
+
+        assertEquals(9, voiture.getCarburant());
+        assertEquals(3, voiture.getCompteurPas());
+    }
+
+    @Test
+    public void testConsommerCarburant_DecrementCompteurPas() {
+        voiture.setCarburant(10);
+        voiture.setCompteurPas(2);
+        
+        voiture.consommerCarburant();
+
+        assertEquals(10, voiture.getCarburant());
+        assertEquals(1, voiture.getCompteurPas());
+    }
+
+    @Test
+    public void testConsommerCarburant_ResetPositionAndScoreWhenCarburantIsZero() {
+        voiture.setCarburant(1);
+        voiture.setPositionX(50);
+        voiture.setPositionY(50);
+        voiture.setScore(10);
+        voiture.setCompteurPas(1);
+        
+        voiture.consommerCarburant();
+
+        assertAll(
+            () -> assertEquals(60, voiture.getCarburant()),
+            () -> assertEquals(0, voiture.getScore()),
+            () -> assertEquals(0, voiture.getPositionX()),
+            () -> assertEquals(0, voiture.getPositionY()),
+            () -> assertEquals(3, voiture.getCompteurPas())
+        );
+    }
+    @Test
+    public void testSetCompteurPas() {
+        voiture.setCompteurPas(5);
+        assertEquals(5, voiture.getCompteurPas());
+    }
+
+    @Test
+    public void testGetCompteurPas_DefaultValue() {
+        assertEquals(3, voiture.getCompteurPas());
     }
 }

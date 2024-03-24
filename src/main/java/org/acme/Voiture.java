@@ -116,4 +116,12 @@ public class Voiture {
     public void setCarburant(int i){
         carburant = i;
     }
+
+    public void setCompteurPas(int i) {
+        compteurPas = i;
+    }
+
+    public int getCompteurPas() {
+        return compteurPas;
+    }
 }
